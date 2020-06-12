@@ -1,22 +1,9 @@
 import * as PIXI from 'pixi.js';
 
 import gameModel, {GameSize} from "./model/GameModel";
-import Sprite = PIXI.Sprite;
-import GameTitle from "./controls/GameTitle";
 import FontFaceLoader from "./helpers/FontFaceLoader";
-import AlphaFadeInEffect from "./pixi/effects/AlphaFadeInEffect";
-import BackgroundControl from "./controls/BackgroundControl";
-import {Container} from "pixi.js";
 import {SceneManager} from "./scenes/SceneManager";
 import LoaderScene from "./scenes/LoaderScene";
-// import GameField from "./game1/GameField";
-// import {QuestionBar} from "./game1/QuestionBar";
-// import {TeamItem} from "./game1/TeamItem";
-// import FontFaceLoader from "./helper/FontFaceLoader";
-// import GameTitle from "./controls/GameTitle";
-// import AlphaFadeInEffect from "./effects/AlphaFadeInEffect";
-
-// let globalScale = .5;
 let globalScale = 1;
 let gameSize:GameSize = {
     width: 1920 * globalScale,
