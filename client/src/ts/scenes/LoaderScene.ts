@@ -7,6 +7,7 @@ import {SceneManager} from "./SceneManager";
 import AlphaFadeInEffect from "../pixi/effects/AlphaFadeInEffect";
 import GameTitle from "../controls/GameTitle";
 import MainScene from "./MainScene";
+import HtmlBackgroundControl from "../controls/HtmlBackgroundControl";
 
 export default class LoaderScene extends BaseScene {
     private readonly gameTitle:PIXI.Container;
@@ -19,10 +20,12 @@ export default class LoaderScene extends BaseScene {
     }
 
     compose():void {
+        let htmlBackgroundControl = new HtmlBackgroundControl('assets/images/game_bg.png');
+        document.body.prepend(htmlBackgroundControl.background);
         this.app.stage.addChild(this.gameTitle);
         PIXI.Loader.shared.add('UI', 'assets/atlases/ui.json');
         PIXI.Loader.shared.add('config', 'assets/config.json');
-        PIXI.Loader.shared.once('complete', this.onLoadComplete.bind(this));
+        PIXI.Loader.shared.onComplete.add(this.onLoadComplete.bind(this));
         PIXI.Loader.shared.load();
         this.gameLoadTime = Date.now();
     }
