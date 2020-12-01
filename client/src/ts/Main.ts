@@ -4,6 +4,7 @@ import gameModel, {GameSize} from "./model/GameModel";
 import FontFaceLoader from "./helpers/FontFaceLoader";
 import {SceneManager} from "./scenes/SceneManager";
 import LoaderScene from "./scenes/LoaderScene";
+import BaseScene from "./scenes/BaseScene";
 let globalScale = 1;
 let gameSize:GameSize = {
     width: 1920 * globalScale,
@@ -11,21 +12,20 @@ let gameSize:GameSize = {
     scale: globalScale
 }
 
-class Main {
+export class Main {
     private readonly app:PIXI.Application;
     public static APP:PIXI.Application;
 
-    constructor() {
+    constructor(private mainScene:typeof BaseScene) {
         this.app = new PIXI.Application({
             width: gameSize.width,
             height: gameSize.height,
-            backgroundColor: 0xcecece,
-            transparent: false
+            backgroundColor: 0x000000,
+            transparent: true
         });
         Main.APP = this.app;
         document.body.appendChild(this.app.view);
-
-        new SceneManager(this.app).navigate(LoaderScene);
+        new SceneManager(this.app).navigate(mainScene);
         window.addEventListener('resize', this.resize.bind(this), {capture: true});
         this.resize();
     }
@@ -60,13 +60,4 @@ class Main {
         gameSize.height = this.app.renderer.height;
         gameModel.updateLayout.emit(gameSize);
     }
-}
-
-window.onload = function () {
-    let fontFaceLoader = new FontFaceLoader('Neuron-Black', 'assets/fonts/Neuron-Black.ttf');
-    fontFaceLoader.load().then(() => {
-        new Main();
-    }).catch(reason => {
-        console.error(reason);
-    });
 }

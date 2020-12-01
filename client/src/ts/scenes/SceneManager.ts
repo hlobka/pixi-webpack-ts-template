@@ -9,7 +9,7 @@ export class SceneManager {
     // @ts-ignore
     private activeScene: BaseScene;
 
-    public constructor(protected app:PIXI.Application) {
+    public constructor(protected app:PIXI.Application, private useSceneCache:boolean = true) {
         this.sceneCache = new Map<string, BaseScene>();
         this.stage = app.stage;
     }
@@ -23,7 +23,9 @@ export class SceneManager {
         if (this.sceneCache.has(targetScreen.name) === false) {
             // @ts-ignore
             this.activeScene = new targetScreen(this, this.app);
+            if (this.useSceneCache) {
             this.sceneCache.set(targetScreen.name, this.activeScene);
+            }
         } else {
             // @ts-ignore
             this.activeScene = this.sceneCache.get(targetScreen.name);

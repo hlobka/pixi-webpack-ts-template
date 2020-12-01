@@ -11,11 +11,9 @@ export default class HtmlBackgroundControl {
             for (let i = 0; i < 30; i++) {
                 setTimeout(() => {
                     this.background.style.opacity = i / 30 + "";
-                    console.log(`opacity = ${i / 30}`)
                 }, i * 25);
             }
         }
-
     }
 
     private setBackgroundStyle() {

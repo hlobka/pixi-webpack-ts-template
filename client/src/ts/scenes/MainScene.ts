@@ -4,6 +4,7 @@ import gameModel, {GameSize} from "../model/GameModel";
 import {Sprite} from "pixi.js";
 import StrictResourcesHelper from "../pixi/StrictResourcesHelper";
 import FullScreenButtonControl from "../controls/FullScreenButtonControl";
+import AlphaFadeInEffect from "../pixi/effects/AlphaFadeInEffect";
 
 export default class MainScene extends BaseScene {
 
@@ -22,6 +23,7 @@ export default class MainScene extends BaseScene {
             sprite.scale.set(Math.sin(x)/2 + 1, Math.cos(x)/2 + 1);
             x += 0.1;
         });
+        new AlphaFadeInEffect(backgroundControl.container, this.app.ticker);
         gameModel.updateLayout.add((gameSize:GameSize) => {
             sprite.x = gameSize.width * .5;
             sprite.y = gameSize.height * .5;

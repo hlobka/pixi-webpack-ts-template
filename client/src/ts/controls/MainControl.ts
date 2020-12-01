@@ -11,8 +11,13 @@ export default abstract class MainControl {
         this.container.addChild(control.container);
     }
 
-    setPivotTo(displayObject:DisplayObject = this.container, type:PivotType = PivotType.C) {
+    remove(control:MainControl):void {
+        this.container.removeChild(control.container);
+    }
 
+    setPivotTo(displayObject:DisplayObject = this.container, type:PivotType = PivotType.C) {
+        let scaleX = displayObject.scale.x;
+        displayObject.scale.set(1);
         // @ts-ignore
         let width = displayObject.width;
         // @ts-ignore
@@ -22,6 +27,9 @@ export default abstract class MainControl {
         switch (type) {
             case PivotType.C:
                 displayObject.pivot.set(centerX, centerY);
+                break;
+            case PivotType.L:
+                displayObject.pivot.set(0, centerY);
                 break;
             case PivotType.TL:
                 displayObject.pivot.set(0, 0);
@@ -45,12 +53,14 @@ export default abstract class MainControl {
                 displayObject.pivot.set(0, height);
                 break;
         }
+        displayObject.scale.set(scaleX);
     }
 
 }
 
 export enum PivotType {
     C,
+    L,
     TL,
     T,
     TR,
