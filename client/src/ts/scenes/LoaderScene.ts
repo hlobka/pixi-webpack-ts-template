@@ -12,7 +12,7 @@ import SimpleLoaderControl from "../controls/SimpleLoaderControl";
 
 export default class LoaderScene extends BaseScene {
     private readonly gameTitle:PIXI.Container;
-    private timeoutBeforeShowTheGame:number = 1000;
+    private timeoutBeforeShowTheGame:number = -1;
     private gameLoadTime:number = -1;
     private simpleLoaderContainer:PIXI.Container;
 
